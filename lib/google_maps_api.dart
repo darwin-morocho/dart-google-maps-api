@@ -15,8 +15,7 @@ class GoogleMapsAPI {
   GoogleMapsAPI(this._apiKey);
 
   /// gets the address and  city from one Location
-  Future<Map<String, String>> reverseGeocode(
-      Map<String, double> location) async {
+  Future<dynamic> reverseGeocode(dynamic location) async {
     try {
       final url =
           'https://maps.googleapis.com/maps/api/geocode/json?latlng=${location['latitude']},${location['longitude']}&key=$_apiKey';
@@ -147,8 +146,8 @@ class GoogleMapsAPI {
   }
 
   /// calculates the center of one array of coords
-  static Map<String, double> averageGeolocation(
-      List<Map<String, double>> coords) {
+  static dynamic averageGeolocation(
+      List<dynamic> coords) {
     if (coords.length == 1) {
       return coords[0];
     }
@@ -187,7 +186,7 @@ class GoogleMapsAPI {
 
   /// calculates the distance between two coords in km
   static double getDistanceInKM(
-      Map<String, double> position1, Map<String, double> position2) {
+      dynamic position1, dynamic position2) {
     final lat1 = position1['latitude'];
     final lon1 = position1['longitude'];
     final lat2 = position2['latitude'];
@@ -208,7 +207,7 @@ class GoogleMapsAPI {
   }
 
   ///
-  static dynamic fitToCoordinates(List<Map<String, double>> coords) {
+  static dynamic fitToCoordinates(List<dynamic> coords) {
     final centerMap = GoogleMapsAPI.averageGeolocation(coords);
 
     final linearDistance =

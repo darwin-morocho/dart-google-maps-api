@@ -60,8 +60,8 @@ class GoogleMapsAPI {
   /// returns the best google direction for one especific origin and destination
   /// return [List<GoogleDirection>]
   Future<List<GoogleDirection>> getTravelData(
-      {@required Map<String, double> origin,
-      @required Map<String, double> destination,
+      {@required dynamic origin,
+      @required dynamic destination,
       String mode = 'driving',
       bool alternatives = false,
       String language = 'es'}) async {

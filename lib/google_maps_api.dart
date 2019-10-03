@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
 import 'package:google_maps_api/src/google_direction.dart';
-export 'package:google_maps_api/google_maps_api.dart';
+export 'package:google_maps_api/src/google_direction.dart';
 
 /// A Calculator.
 class GoogleMapsAPI {

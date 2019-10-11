@@ -91,14 +91,16 @@ class GoogleMapsAPI {
             final distance = leg['distance']['value'] as int;
             final duration = leg['duration']['value'] as int;
 
+            final encodedPolyline=route["overview_polyline"]["points"];
             final polylinePoints =
-                decodeEncodedPolyline(route["overview_polyline"]["points"]);
+                decodeEncodedPolyline(encodedPolyline);
 
             routes.add(GoogleDirection(
                 start_address: start_address,
                 end_address: end_address,
                 distance: distance,
                 duration: duration,
+                encodedPolyline: encodedPolyline,
                 polylinePoints: polylinePoints));
           }
         }

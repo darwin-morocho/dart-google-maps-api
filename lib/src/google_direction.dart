@@ -6,11 +6,12 @@ class GoogleDirection {
   final int distance;
   final int duration;
   final List<Point> polylinePoints;
+  final String encodedPolyline;
 
-  GoogleDirection(
+  GoogleDirection( 
       {this.start_address,
         this.end_address,
         this.distance,
         this.duration,
-        this.polylinePoints});
+        this.polylinePoints,this.encodedPolyline});
 }

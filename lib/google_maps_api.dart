@@ -14,6 +14,28 @@ class GoogleMapsAPI {
 
   GoogleMapsAPI(this._apiKey);
 
+  Future<List<dynamic>> searchPlace(String searchText) async {
+    try {
+      final url =
+          "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${Uri.encodeFull(searchText)}&inputtype=textquery&fields=formatted_address,name,geometry&key=$_apiKey&language=es";
+
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final parsed = jsonDecode(response.body);
+        print(response.body);
+
+        if (parsed['status'] == 'OK') {
+          final result = parsed['candidates'];
+          return result;
+        }
+        return null;
+      }
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   /// gets the address and  city from one Location
   Future<dynamic> reverseGeocode(dynamic location) async {
     try {
@@ -67,7 +89,6 @@ class GoogleMapsAPI {
       String language = 'es'}) async {
     List<GoogleDirection> routes = List();
     try {
-
       print(_apiKey);
       final url =
           'https://maps.googleapis.com/maps/api/directions/json?origin=${origin['latitude']},${origin['longitude']}&destination=${destination['latitude']},${destination['longitude']}&mode=$mode&alternatives=$alternatives&language=$language&key=$_apiKey';
@@ -91,9 +112,8 @@ class GoogleMapsAPI {
             final distance = leg['distance']['value'] as int;
             final duration = leg['duration']['value'] as int;
 
-            final encodedPolyline=route["overview_polyline"]["points"];
-            final polylinePoints =
-                decodeEncodedPolyline(encodedPolyline);
+            final encodedPolyline = route["overview_polyline"]["points"];
+            final polylinePoints = decodeEncodedPolyline(encodedPolyline);
 
             routes.add(GoogleDirection(
                 start_address: start_address,
@@ -148,8 +168,7 @@ class GoogleMapsAPI {
   }
 
   /// calculates the center of one array of coords
-  static dynamic averageGeolocation(
-      List<dynamic> coords) {
+  static dynamic averageGeolocation(List<dynamic> coords) {
     if (coords.length == 1) {
       return coords[0];
     }
@@ -187,8 +206,7 @@ class GoogleMapsAPI {
   }
 
   /// calculates the distance between two coords in km
-  static double getDistanceInKM(
-      dynamic position1, dynamic position2) {
+  static double getDistanceInKM(dynamic position1, dynamic position2) {
     final lat1 = position1['latitude'];
     final lon1 = position1['longitude'];
     final lat2 = position2['latitude'];

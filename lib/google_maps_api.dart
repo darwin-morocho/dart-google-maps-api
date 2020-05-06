@@ -22,7 +22,6 @@ class GoogleMapsAPI {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body);
-        print(response.body);
 
         if (parsed['status'] == 'OK') {
           final result = parsed['candidates'];
@@ -89,11 +88,8 @@ class GoogleMapsAPI {
       String language = 'es'}) async {
     List<GoogleDirection> routes = List();
     try {
-      print(_apiKey);
       final url =
           'https://maps.googleapis.com/maps/api/directions/json?origin=${origin['latitude']},${origin['longitude']}&destination=${destination['latitude']},${destination['longitude']}&mode=$mode&alternatives=$alternatives&language=$language&key=$_apiKey';
-
-      print(url);
 
       final response = await http.get(url);
 

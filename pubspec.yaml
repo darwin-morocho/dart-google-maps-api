@@ -1,6 +1,6 @@
 name: google_maps_api
 description: A dart package to use the most common google maps API like reverse geocoding, search places.
-version: 0.0.1
+version: 0.0.2
 author: Darwin Morocho <dsmr.apps@gmail.com>
 homepage: https://github.com/darwin-morocho/dart-google-maps-api
 
